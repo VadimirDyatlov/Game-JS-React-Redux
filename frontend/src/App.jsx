@@ -1,20 +1,26 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addData } from './store/game/reducer';
 
 function App() {
-  const data = useSelector((state) => state);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(addData());
-  }, [dispatch]);
+  const user = 0;
   return (
-    <div className="App">
-      {data.game.data.map((el) => (
-        <div key={el}>{el}</div>
-      ))}
-    </div>
+    <BrowserRouter>
+
+      {user
+        ? (
+          <Routes>
+            <div />
+          </Routes>
+        ) : (
+          <Routes>
+            <div />
+          </Routes>
+        )}
+
+    </BrowserRouter>
   );
 }
 
