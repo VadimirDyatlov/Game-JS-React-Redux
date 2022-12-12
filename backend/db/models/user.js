@@ -15,15 +15,20 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
     },
     name: {
+      allowNull: false,
       type: DataTypes.TEXT,
     },
     password: {
+      allowNull: false,
       type: DataTypes.TEXT,
     },
     money: {
+      allowNull: false,
       type: DataTypes.INTEGER,
+      defaultValue: 0,
     },
     avatar: {
+      allowNull: false,
       type: DataTypes.TEXT,
     },
     createdAt: {
