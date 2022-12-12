@@ -15,15 +15,19 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
     },
     user_id: {
+      allowNull: false,
       type: DataTypes.INTEGER,
     },
     kill_counte: {
+      allowNull: false,
       type: DataTypes.INTEGER,
     },
     counter_gold: {
+      allowNull: false,
       type: DataTypes.INTEGER,
     },
     time_counter: {
+      allowNull: false,
       type: DataTypes.INTEGER,
     },
     createdAt: {
