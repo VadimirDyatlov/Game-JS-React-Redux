@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 const authRouter = require('express').Router();
 const bcrypt = require('bcrypt');
-const { User } = require('../db/models');
+const { User, Hero } = require('../db/models');
 // const checkAvatar = require('../../models/checkAvatar');
 
 function authUser(user) {
@@ -9,15 +9,23 @@ function authUser(user) {
     user: {
       id: user.id,
       name: user.name,
-      money: user.money,
+      gold: user.gold,
     },
+  };
+}
+
+function createHero(userId) {
+  return {
+    user_id: userId,
+    type: 1,
+    hp: 100,
+    speed: 2,
+    damage: 8,
   };
 }
 
 authRouter.route('/checkSession')
   .get((req, res) => {
-    console.log(req.session.userId);
-    console.log(res.locals.user);
     if (req.session.userId && res.locals.user) {
       res.status(200).json(authUser(res.locals.user));
     } else {
@@ -31,7 +39,6 @@ authRouter.route('/reg')
       const {
         name, password, password2,
       } = req.body;
-      // console.log(req.body);
 
       if (password !== password2 || password.length < 8) {
         const message = 'Пароль не совпадает или его длина не верная!';
@@ -51,12 +58,12 @@ authRouter.route('/reg')
         password: await bcrypt.hash(password, 8),
         avatar: '123',
       });
-      // console.log(authUser(user));
+      await Hero.create(createHero(user.id));
+
       req.session.userId = user.id;
       res.status(200).json(authUser(user));
     } catch (error) {
-      console.log('-->', error.message);
-      // console.log(typeof error);
+      console.log(error.message);
       res.status(500).json({ message: error.message });
     }
   });
@@ -66,9 +73,6 @@ authRouter.route('/log')
     try {
       const { name, password } = req.body;
       const existingUser = await User.findOne({ where: { name } });
-
-      console.log('1---->', existingUser);
-      console.log('2---->', !existingUser);
 
       if (!existingUser) {
         res.status(404).json({ message: 'Пользователь не найден!' });
@@ -83,7 +87,7 @@ authRouter.route('/log')
       req.session.userId = existingUser.id;
       res.status(200).json(authUser(existingUser));
     } catch (error) {
-      console.log('-->', error.message);
+      console.log(error.message);
       res.status(500).json({ message: error.message });
     }
   });

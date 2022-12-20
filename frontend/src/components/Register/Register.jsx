@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getUserSingUp, setError } from '../../store/userReducer/userReducer';
+import { getUserSingUp, setError } from '../../store/authReducer/authReducer';
 import './Register.css';
 
 function setEventUser(event) {
@@ -17,7 +17,7 @@ function setEventUser(event) {
 function Register() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user, error } = useSelector((state) => state.user);
+  const { user, error } = useSelector((state) => state.auth);
   const signInForm = useRef();
   // console.log(signInForm);
   const onSubmit = useCallback(
@@ -34,9 +34,9 @@ function Register() {
   console.log('e=>', error, '<=e');
 
   if (error !== false) {
-    setInterval(() => {
+    setTimeout(() => {
       dispatch(setError());
-    }, 3000);
+    }, 6000);
   }
   
   useEffect(

@@ -1,10 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import gameReducer from './game/reducer';
-import userReducer from './userReducer/userReducer';
+import authReducer from './authReducer/authReducer';
+import gameReducer from './gameReducer/gameReducer';
+import heroReducer from './heroReducer/heroReducer';
+// import settingsReducer from './settingsReducer/settingsReducer';
+// import statisticsReducer from './statisticsReducer/statisticsReducer';
 
 export default configureStore({
   reducer: {
-    // game: gameReducer,
-    user: userReducer,
+    game: gameReducer,
+    auth: authReducer,
+    hero: heroReducer,
+    // settings: settingsReducer,
+    // statistics: statisticsReducer,
   },
 });

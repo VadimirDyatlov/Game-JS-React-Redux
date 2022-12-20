@@ -9,15 +9,23 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       user_id: {
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
-      kill_counte: {
+      killings: {
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
-      counter_gold: {
+      gold: {
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
-      time_counter: {
+      time: {
+        allowNull: false,
         type: Sequelize.INTEGER,
       },
       createdAt: {

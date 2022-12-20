@@ -9,15 +9,20 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       name: {
+        allowNull: false,
         type: Sequelize.TEXT,
       },
       password: {
+        allowNull: false,
         type: Sequelize.TEXT,
       },
-      money: {
+      gold: {
+        allowNull: false,
+        defaultValue: 0,
         type: Sequelize.INTEGER,
       },
       avatar: {
+        allowNull: false,
         type: Sequelize.TEXT,
       },
       createdAt: {
