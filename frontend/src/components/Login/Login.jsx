@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getUserSingIn, setError } from '../../store/userReducer/userReducer';
+import { getUserSingIn, setError } from '../../store/authReducer/authReducer';
 import './Login.css';
 
 function setEventUser(event) {
@@ -15,7 +15,7 @@ function setEventUser(event) {
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user, error } = useSelector((state) => state.user);
+  const { user, error } = useSelector((state) => state.auth);
   const signInForm = useRef();
 
   const onSubmit = useCallback(
@@ -29,9 +29,9 @@ function Login() {
   console.log('user==>', user);
   if (error !== false) {
     console.log('set-int');
-    setInterval(() => {
+    setTimeout(() => {
       dispatch(setError());
-    }, 3000);
+    }, 6000);
   }
   useEffect(
     () => {

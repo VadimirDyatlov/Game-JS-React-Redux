@@ -4,32 +4,39 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCheckSession } from './store/userReducer/userReducer';
+import { getCheckSession } from './store/authReducer/authReducer';
 
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import GameMenu from './components/GameMenu/GameMenu';
+import Game from './components/Game/Game';
+import UpgradeHero from './components/UpgradeHero/UpgradeHero';
+import Rating from './components/Rating/Rating';
+import NoPage from './components/NoPage/NoPage';
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.auth);
   useEffect(() => {
     dispatch(getCheckSession());
   }, []);
-  console.log(user);
   return (
     <BrowserRouter>
       {user
         ? (
           <Routes>
-            <Route path="/reg" element={<Register />} />
+            <Route path="reg" element={<Register />} />
             <Route path="log" element={<Login />} />
             <Route path="/" element={<GameMenu />} />
+            <Route path="game" element={<Game />} />
+            <Route path="hero-up" element={<UpgradeHero />} />
+            <Route path="rating" element={<Rating />} />
           </Routes>
         ) : (
           <Routes>
-            <Route path="/reg" element={<Register />} />
+            <Route path="reg" element={<Register />} />
             <Route path="log" element={<Login />} />
+            <Route path="123" element={<NoPage />} />
             <Route path="/" element={<GameMenu />} />
           </Routes>
         )}

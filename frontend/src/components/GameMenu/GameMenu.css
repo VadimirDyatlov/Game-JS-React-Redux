@@ -15,6 +15,13 @@ body {
   padding: 0;
 }
 
+.blue {
+  color: #185875;
+}
+.yellow {
+  color: #ecbb15;
+}
+
 .anim-show-gamemenu {
   position: absolute;
   top: 50%;

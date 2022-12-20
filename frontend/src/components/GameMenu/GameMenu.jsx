@@ -1,20 +1,19 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getUserLogOut } from '../../store/userReducer/userReducer';
+import { getUserLogOut } from '../../store/authReducer/authReducer';
 import './GameMenu.css';
 
 function GameMenu() {
-  const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const onClick = useCallback(() => {
     dispatch(getUserLogOut());
   }, []);
-  console.log('game', user);
   return (
     <nav className="anim-show-gamemenu">
-      <ul className="game-menu nes-container is-dark with-title">
+      <ul className="game-menu nes-container is-rounded is-dark with-title">
         {user ? (
           <>
             <li>
@@ -23,7 +22,7 @@ function GameMenu() {
               </Link>
             </li>
             <li>
-              <Link to="/profileHero" className="lists__items">
+              <Link to="/hero-up" className="lists__items">
                 Герой
               </Link>
             </li>

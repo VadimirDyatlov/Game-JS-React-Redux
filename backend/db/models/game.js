@@ -4,7 +4,7 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
   class Game extends Model {
-    static associate(models) {
+    static associate() {
     }
   }
   Game.init({
@@ -15,18 +15,22 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
     },
     user_id: {
+      references: {
+        model: 'Users',
+        key: 'id',
+      },
       allowNull: false,
       type: DataTypes.INTEGER,
     },
-    kill_counte: {
+    killings: {
       allowNull: false,
       type: DataTypes.INTEGER,
     },
-    counter_gold: {
+    gold: {
       allowNull: false,
       type: DataTypes.INTEGER,
     },
-    time_counter: {
+    time: {
       allowNull: false,
       type: DataTypes.INTEGER,
     },

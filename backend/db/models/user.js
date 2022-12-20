@@ -4,7 +4,7 @@ const {
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    static associate(models) {
+    static associate() {
     }
   }
   User.init({
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.TEXT,
     },
-    money: {
+    gold: {
       allowNull: false,
       type: DataTypes.INTEGER,
       defaultValue: 0,
