@@ -11,7 +11,8 @@ import Login from './components/Login/Login';
 import GameMenu from './components/GameMenu/GameMenu';
 import Game from './components/Game/Game';
 import UpgradeHero from './components/UpgradeHero/UpgradeHero';
-import Rating from './components/Rating/Rating';
+import Statistics from './components/Statistics/Statistics';
+import Settings from './components/Settings/Settings';
 import NoPage from './components/NoPage/NoPage';
 
 function App() {
@@ -30,7 +31,8 @@ function App() {
             <Route path="/" element={<GameMenu />} />
             <Route path="game" element={<Game />} />
             <Route path="hero-up" element={<UpgradeHero />} />
-            <Route path="rating" element={<Rating />} />
+            <Route path="statistics" element={<Statistics />} />
+            <Route path="settings" element={<Settings />} />
           </Routes>
         ) : (
           <Routes>

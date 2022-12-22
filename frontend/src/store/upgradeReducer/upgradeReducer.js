@@ -19,6 +19,8 @@ const sendUpgradeSkills = createAsyncThunk('hero/sendUpgradeSkills', async (data
 const userSlice = createSlice({
   name: 'UpgradeHero',
   initialState: {
+    error: false,
+    status: null,
     UpgradeHeroValue: {
       hp: null,
       damage: null,
@@ -69,6 +71,20 @@ const userSlice = createSlice({
       }
     },
     [getHeroUpgrade.rejected]: (state, action) => {
+      state.status = 'rejected';
+      if (action.payload.message) {
+        state.error = action.payload.message;
+      }
+    },
+    [sendUpgradeSkills.pending]: (state) => {
+      state.status = 'loading';
+      state.error = false;
+    },
+    [sendUpgradeSkills.fulfilled]: (state, action) => {
+      state.status = 'resolved';
+      state.UpgradeHeroValue = action.payload.hero;
+    },
+    [sendUpgradeSkills.rejected]: (state, action) => {
       state.status = 'rejected';
       if (action.payload.message) {
         state.error = action.payload.message;

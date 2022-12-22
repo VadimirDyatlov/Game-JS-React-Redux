@@ -5,7 +5,8 @@ const urlStore = {
   authLogOut: '/auth/logout',
   getHero: '/game/gethero',
   sendRoundStats: '/game/roundstats',
-  sendUpgradeSkills: '/hero/getskills',
+  sendUpgradeSkills: '/upgrade/sendskills',
+  getPlayerStats: '/statistics/getstats',
 };
 
 export default urlStore;

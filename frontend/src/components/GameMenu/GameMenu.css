@@ -1,12 +1,14 @@
 html {
   height: 100%;
   margin: 0;
+  overflow: hidden;
 }
 
 body {
   background-image: url('../../../public/img/backMenu.gif');
   background-size: cover;
   background-repeat: no-repeat;
+  /* overflow: hidden; */
   margin: 0;
   padding: 0;
   width: 100%;
@@ -106,7 +108,7 @@ li a {
   padding: 50px!important;
   align-items: center;
   gap: 20px;
-  background-color: white;
+  background-color: rgba(16, 44, 121, 0.726);
   color: black;
   box-sizing: border-box;
   width: 700px;
