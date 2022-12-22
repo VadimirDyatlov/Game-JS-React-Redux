@@ -40,7 +40,7 @@ module.exports = {
         {
           name: 'Chuck',
           password: await bcrypt.hash('12345678', 8),
-          gold: 120,
+          gold: 122,
           avatar: '123',
           createdAt: new Date(),
           updatedAt: new Date(),
