@@ -26,13 +26,13 @@ function Login() {
     },
     [signInForm],
   );
-  console.log('user==>', user);
+
   if (error !== false) {
-    console.log('set-int');
     setTimeout(() => {
       dispatch(setError());
     }, 6000);
   }
+
   useEffect(
     () => {
       if (user && user.id) {

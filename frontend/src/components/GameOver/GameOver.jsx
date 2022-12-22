@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { formatTime } from '../functions';
 import './GameOver.css';
 
 function GameOver({ playGame }) {
@@ -46,7 +47,7 @@ function GameOver({ playGame }) {
               <h1>Время игры</h1>
             </th>
             <th>
-              <h1>{gameStats.gameTime}</h1>
+              <h1>{formatTime(gameStats.gameTime)}</h1>
             </th>
           </tr>
         </thead>

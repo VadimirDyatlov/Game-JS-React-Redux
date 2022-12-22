@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
@@ -17,9 +18,16 @@ import calcGoldCoin from './functions/calcGoldCoin';
 // полуение героя +
 // повышение лвл(всего 10 лвл) +
 // отправить статистику раунда на сервер(золото, лвл, время) +
+// сохранять в статистику выигрышь или проигрышь
 
-const getHero = createAsyncThunk('game/getHero', async (_, { rejectWithValue }) => getHeroApi(rejectWithValue, urlStore.getHero));
-const sendGameStats = createAsyncThunk('game/roundstats', async (data, { rejectWithValue }) => sendGameStatsApi(rejectWithValue, data, urlStore.sendRoundStats));
+const getHero = createAsyncThunk(
+  'game/getHero',
+  async (_, { rejectWithValue }) => getHeroApi(rejectWithValue, urlStore.getHero),
+);
+const sendGameStats = createAsyncThunk(
+  'game/roundstats',
+  async (data, { rejectWithValue }) => sendGameStatsApi(rejectWithValue, data, urlStore.sendRoundStats),
+);
 
 const gameSlice = createSlice({
   name: 'game',

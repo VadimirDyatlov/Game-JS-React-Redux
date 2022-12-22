@@ -27,7 +27,7 @@ function GameMenu() {
               </Link>
             </li>
             <li>
-              <Link to="/profile" className="lists__items">
+              <Link to="/settings" className="lists__items">
                 Настройки профиля
               </Link>
             </li>
@@ -37,7 +37,7 @@ function GameMenu() {
               </Link>
             </li>
             <li>
-              <Link to="/rating" className="lists__items">
+              <Link to="/statistics" className="lists__items">
                 Рейтинг игроков
               </Link>
             </li>

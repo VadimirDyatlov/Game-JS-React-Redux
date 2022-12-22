@@ -10,10 +10,22 @@ import {
   getCheckSessionApi, getUserSingUpApi, getUserSingInApi, getUserLogOutApi,
 } from './ApiFunction';
 
-const getCheckSession = createAsyncThunk('auth/getCheckSession', async (_, { rejectWithValue }) => getCheckSessionApi(rejectWithValue, urlStore.checkSession));
-const getUserSingUp = createAsyncThunk('auth/getUserSingUp', async (data, { rejectWithValue }) => getUserSingUpApi(rejectWithValue, data, urlStore.authReg));
-const getUserSingIn = createAsyncThunk('auth/getUserSingIn', async (data, { rejectWithValue }) => getUserSingInApi(rejectWithValue, data, urlStore.authLog));
-const getUserLogOut = createAsyncThunk('auth/getUserLogOut', async (_, { rejectWithValue }) => getUserLogOutApi(rejectWithValue, urlStore.authLogOut));
+const getCheckSession = createAsyncThunk(
+  'auth/getCheckSession',
+  async (_, { rejectWithValue }) => getCheckSessionApi(rejectWithValue, urlStore.checkSession),
+);
+const getUserSingUp = createAsyncThunk(
+  'auth/getUserSingUp',
+  async (data, { rejectWithValue }) => getUserSingUpApi(rejectWithValue, data, urlStore.authReg),
+);
+const getUserSingIn = createAsyncThunk(
+  'auth/getUserSingIn',
+  async (data, { rejectWithValue }) => getUserSingInApi(rejectWithValue, data, urlStore.authLog),
+);
+const getUserLogOut = createAsyncThunk(
+  'auth/getUserLogOut',
+  async (_, { rejectWithValue }) => getUserLogOutApi(rejectWithValue, urlStore.authLogOut),
+);
 
 const userSlice = createSlice({
   name: 'auth',

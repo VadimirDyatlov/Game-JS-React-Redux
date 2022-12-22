@@ -1,7 +1,16 @@
 const heroRouter = require('express').Router();
 const { User, Hero } = require('../db/models');
 
-heroRouter.route('/getskills')
+function heroStatsObj(heroObj) {
+  return {
+    type: heroObj.type,
+    hp: heroObj.hp,
+    speed: heroObj.speed,
+    damage: heroObj.damage,
+  };
+}
+
+heroRouter.route('/sendskills')
   .post(async (req, res) => {
     try {
       const { skills, gold } = req.body;
@@ -14,7 +23,7 @@ heroRouter.route('/getskills')
       const user = await User.findOne({ where: { id: userId } });
       user.gold = gold;
       user.save();
-      res.status(200).json({ masage: 'успех' });
+      res.status(200).json({ hero: heroStatsObj(hero) });
     } catch (error) {
       console.log(error.masage);
       res.status(500).json({ masage: error.masage });

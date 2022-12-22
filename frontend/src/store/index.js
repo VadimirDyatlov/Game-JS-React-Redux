@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './authReducer/authReducer';
 import gameReducer from './gameReducer/gameReducer';
-import heroReducer from './heroReducer/heroReducer';
+import heroReducer from './upgradeReducer/upgradeReducer';
 // import settingsReducer from './settingsReducer/settingsReducer';
-// import statisticsReducer from './statisticsReducer/statisticsReducer';
+import statisticsReducer from './statisticsReducer/statisticsReducer';
 
 export default configureStore({
   reducer: {
@@ -11,6 +11,6 @@ export default configureStore({
     auth: authReducer,
     hero: heroReducer,
     // settings: settingsReducer,
-    // statistics: statisticsReducer,
+    statistics: statisticsReducer,
   },
 });
