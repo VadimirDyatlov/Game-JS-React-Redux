@@ -33,11 +33,11 @@ function Register() {
   console.log('=>', user, '<=');
   console.log('e=>', error, '<=e');
 
-  if (error !== false) {
-    setTimeout(() => {
-      dispatch(setError());
-    }, 6000);
-  }
+  // if (error !== false) {
+  //   setTimeout(() => {
+  //     dispatch(setError());
+  //   }, 6000);
+  // }
   
   useEffect(
     () => {

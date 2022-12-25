@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-async function getPlayerStatsApi(rejectWithValue, url) {
+async function getPlayersStatsApi(rejectWithValue, url) {
   try {
     const res = await axios.get(url);
     return res.data;
@@ -19,5 +19,5 @@ async function getStatsTop15Api2(rejectWithValue, url) {
 }
 
 export {
-  getPlayerStatsApi, getStatsTop15Api2,
+  getPlayersStatsApi, getStatsTop15Api2,
 };

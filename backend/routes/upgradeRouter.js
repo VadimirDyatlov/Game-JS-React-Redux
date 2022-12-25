@@ -15,6 +15,7 @@ heroRouter.route('/sendskills')
     try {
       const { skills, gold } = req.body;
       const { userId } = req.session;
+      console.log(userId, '<-----');
       const hero = await Hero.findOne({ where: { user_id: userId, type: skills.type } });
       hero.hp = skills.hp;
       hero.damage = skills.damage;
@@ -25,8 +26,8 @@ heroRouter.route('/sendskills')
       user.save();
       res.status(200).json({ hero: heroStatsObj(hero) });
     } catch (error) {
-      console.log(error.masage);
-      res.status(500).json({ masage: error.masage });
+      console.log(error.message);
+      res.status(500).json({ message: error.message });
     }
   });
 

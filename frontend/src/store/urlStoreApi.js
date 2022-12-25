@@ -6,7 +6,9 @@ const urlStore = {
   getHero: '/game/gethero',
   sendRoundStats: '/game/roundstats',
   sendUpgradeSkills: '/upgrade/sendskills',
-  getPlayerStats: '/statistics/getstats',
+  getPlayersStats: '/statistics/getPlaersStats',
+  editUserData: '/settings/edituser',
+  getPlayerStats: '/settings/getPlayerStats',
 };
 
 export default urlStore;

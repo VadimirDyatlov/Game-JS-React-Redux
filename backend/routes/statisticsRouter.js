@@ -1,12 +1,11 @@
 const statisticsRouter = require('express').Router();
-
 const { User, Game, sequelize } = require('../db/models');
 
 // function statsObj(user, hero) {
 
 // }
 
-statisticsRouter.route('/getstats')
+statisticsRouter.route('/getPlaersStats')
   .get(async (req, res) => {
     try {
       const statistics = await Game.findAll({
@@ -27,8 +26,8 @@ statisticsRouter.route('/getstats')
       console.log(statistics);
       res.status(200).json({ statistics });
     } catch (error) {
-      console.log(error);
-      res.status(502).json({ masage: error.masage });
+      console.log(error.message);
+      res.status(502).json({ message: error.message });
     }
   });
 

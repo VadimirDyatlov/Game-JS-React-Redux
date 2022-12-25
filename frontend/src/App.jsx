@@ -13,6 +13,7 @@ import Game from './components/Game/Game';
 import UpgradeHero from './components/UpgradeHero/UpgradeHero';
 import Statistics from './components/Statistics/Statistics';
 import Settings from './components/Settings/Settings';
+import Chat from './components/Chat/Chat';
 import NoPage from './components/NoPage/NoPage';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
             <Route path="hero-up" element={<UpgradeHero />} />
             <Route path="statistics" element={<Statistics />} />
             <Route path="settings" element={<Settings />} />
+            <Route path="chat" element={<Chat />} />
           </Routes>
         ) : (
           <Routes>

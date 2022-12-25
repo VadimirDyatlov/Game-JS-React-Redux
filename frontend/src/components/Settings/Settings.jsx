@@ -2,45 +2,92 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-// import { editUser } from '../../store/userReducer/reducer';
-// import { userOneStats, heroOneStats } from '../../store/gameReducer/reducer';
+import { getPlayerStats } from '../../store/settingsReducer/settingsReducer';
+import { editUserData, setError } from '../../store/authReducer/authReducer';
 import './Settings.css';
 import { formatTime } from '../functions';
 
 function Settings() {
-  const { user } = useSelector((state) => state.auth);
-  const { oneStatistic, heroStats } = useSelector((state) => state.game);
+  console.log('render');
+
+  const { user, error } = useSelector((state) => state.auth);
+  const { playerStats } = useSelector((state) => state.settings);
   const dispatch = useDispatch();
   const editProfileForm = useRef();
 
-  // useEffect((event) => {
-  //   dispatch(userOneStats({ event, id: user.id }));
-  // }, []);
+  useEffect(() => {
+    dispatch(getPlayerStats());
+  }, []);
 
   // useEffect((event) => {
   //   console.log('---->', event);
   //   dispatch(heroOneStats(event));
   // }, []);
 
-  const onSubmit = useCallback(
-    () => {
-      // event.preventDefault();
+  if (error !== false) {
+    setTimeout(() => {
+      dispatch(setError());
+    }, 6000);
+  }
 
-      // dispatch(editUser(event));
+  const onSubmit = useCallback(
+    (event) => {
+      event.preventDefault();
+      console.log(event.target);
+      const userData = {
+        name: event.target.name.value,
+        password: event.target.password.value,
+      };
+      console.log(userData);
+      dispatch(editUserData(userData));
     },
     [editProfileForm],
   );
-
+  console.log(playerStats[0].gold, '<-----');
   return (
     <div className="container__stats anim-show-profile flex">
       <div className="user__wrapper">
+        <div className="edit-user-profile nes-container is-rounded is-dark">
+          <form className="edit-form" ref={editProfileForm} onSubmit={onSubmit}>
+            <h3 className="edit-title">Изменить имя и пароль:</h3>
+            <div className="edit-profile">
+              <input
+                // required
+                autoComplete="off"
+                name="name"
+                type="name"
+                placeholder="Name"
+                defaultValue={user.name}
+                className="edit__input"
+              />
+            </div>
+            <div className="edit-profile">
+              <input
+                // required
+                // autoComplete="off"
+                name="password"
+                type="password"
+                placeholder="New password"
+              />
+            </div>
+            <button type="submit" className="btn-2 nes-btn is-primary edit-btn">
+              Изменить
+            </button>
+          </form>
+          { error !== false && <div className="error_mes">{error}</div> }
+        </div>
         <div className="user-profile">
-          <img
-            className="avatar"
-            src="https://cdnn11.img.sputnik.by/img/07e5/07/06/1054427663_79:0:979:900_1920x0_80_0_0_7d61a9785aa88b97857d3414f37ba600.jpg"
-            alt="Ash"
-          />
-          <div className="username">{user.name}</div>
+          {user.avatar === 'false' ? <span className="avatarL"><h1 className="hsett">{user.name[0]}</h1></span>
+            : (
+              <>
+                <img
+                  className="avatar"
+                  src="https://cdnn11.img.sputnik.by/img/07e5/07/06/1054427663_79:0:979:900_1920x0_80_0_0_7d61a9785aa88b97857d3414f37ba600.jpg"
+                  alt="Ash"
+                />
+                <div className="username">{user.name}</div>
+              </>
+            )}
           <div className="edit-profile">
             <input
               required
@@ -56,57 +103,24 @@ function Settings() {
             />
           </div>
         </div>
-        <div className="edit-user-profile nes-container is-rounded is-dark">
-          <form className="edit-form" ref={editProfileForm} onSubmit={onSubmit}>
-            <h3 className="edit-title">Изменить почту и пароль:</h3>
-            <div className="edit-profile">
-              <input
-                required
-                autoComplete="off"
-                name="name"
-                type="name"
-                placeholder="Name"
-                defaultValue={user.name}
-                className="edit__input"
-              />
-            </div>
-            <div className="edit-profile">
-              <input
-                required
-                autoComplete="off"
-                name="password"
-                type="password"
-                placeholder="New password"
-              />
-            </div>
-            <button type="submit" className="btn-2 nes-btn is-primary edit-btn">
-              Изменить
-            </button>
-          </form>
-        </div>
       </div>
+
       <div className="score__table">
         <table className="container__profile">
           <thead>
             <tr>
               <th>
-                <h1>Уровень</h1>
+                <h1>Games Played</h1>
               </th>
               <th>
-                <h1>Очки</h1>
-              </th>
-              <th>
-                <h1>Золото</h1>
+                <h1>Killings</h1>
               </th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>{heroStats.lvl}</td>
-              <td>{heroStats.score}</td>
-              {oneStatistic.map((el) => (
-                <td>{el['Game.countMoney']}</td>
-              ))}
+              <td>{playerStats[0].gamesPlayed}</td>
+              <td>{playerStats[0].killings}</td>
             </tr>
           </tbody>
         </table>
@@ -114,25 +128,17 @@ function Settings() {
           <thead>
             <tr>
               <th>
-                <h1>Время в игре</h1>
+                <h1>Gold</h1>
               </th>
               <th>
-                <h1>Убито врагов</h1>
-              </th>
-              <th>
-                <h1>Нанесено урона</h1>
+                <h1>Time Game</h1>
               </th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              {oneStatistic.map((el) => (
-                <>
-                  <td>{formatTime(el['Game.timeGame'])}</td>
-                  <td>{el['Game.countEnemies']}</td>
-                  <td>{el['Game.countDamage']}</td>
-                </>
-              ))}
+              <td>{playerStats[0].gold}</td>
+              <td>{playerStats[0].time}</td>
             </tr>
           </tbody>
         </table>
