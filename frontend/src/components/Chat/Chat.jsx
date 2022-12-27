@@ -12,6 +12,7 @@ function Chat() {
   console.log('render');
   const dispatch = useDispatch();
   const [socket] = useState(io('ws://localhost:4000'));
+  const ref = useRef();
   // const [connected, setConnected] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const { messageHistory } = useSelector((state) => state.chat);
@@ -22,6 +23,7 @@ function Chat() {
       id: user.id,
       name: user.name,
     };
+    ref.current.reset();
     socket.emit('message', newMessage);
   };
 
@@ -49,7 +51,7 @@ function Chat() {
           {' '}
           <span className="yellow">COMMUNITY</span>
         </h1>
-        <form className="form__chat" onSubmit={handleSendMessage}>
+        <form className="form__chat" ref={ref} onSubmit={handleSendMessage}>
           <input
             name="text"
             className="nes-input"
