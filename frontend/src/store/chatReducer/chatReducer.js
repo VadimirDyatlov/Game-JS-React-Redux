@@ -14,42 +14,25 @@ import {
   // getPlayersStatsApi,
 } from './ApiFunction';
 
-// const getPlayersStats = createAsyncThunk(
-//   'statistics/getPlayerStats',
-//   async (_, { rejectWithValue }) => getPlayersStatsApi(rejectWithValue, urlStore.getPlayersStats),
-// );
-
 const userSlice = createSlice({
   name: 'statistics',
   initialState: {
-
+    messageHistory: [],
   },
   reducers: {
-
-
+    getMessageHistory(state, action) {
+      state.messageHistory = action.payload.allMessage;
+    },
+    getNewMessage(state, action) {
+      state.messageHistory = [...state.messageHistory, action.payload.newMessage];
+    },
   },
 
   extraReducers: {
-    // [.pending]: (state) => {
-    //   state.status = 'loading';
-    //   state.error = false;
-    // },
-    // [.fulfilled]: (state, action) => {
-    //   state.status = 'resolved';
-    //   if (action.payload.user) {
-    //     state.user = action.payload.user;
-    //   }
-    // },
-    // [.rejected]: (state, action) => {
-    //   state.status = 'rejected';
-    //   if (action.payload.message) {
-    //     state.error = action.payload.message;
-    //   }
-    // },
   },
 });
 
-// export const { } = userSlice.actions;
+export const { getMessageHistory, getNewMessage } = userSlice.actions;
 export {
   // getPlayersStats,
 };

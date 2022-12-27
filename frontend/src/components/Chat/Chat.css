@@ -11,7 +11,7 @@
   gap: 20px;
   background-color: #212529;
   padding-top: 50px!important;
-  overflow: auto;
+  /* overflow: auto; */
   height:400px;
 }
 
@@ -26,7 +26,8 @@
 }
 
 .messages {
-  width: 489px;
+  width: 100%;
+  overflow: auto;
 }
 
 .form__chat {

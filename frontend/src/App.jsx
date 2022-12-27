@@ -40,7 +40,7 @@ function App() {
           <Routes>
             <Route path="reg" element={<Register />} />
             <Route path="log" element={<Login />} />
-            <Route path="123" element={<NoPage />} />
+            <Route path="*" element={<NoPage />} />
             <Route path="/" element={<GameMenu />} />
           </Routes>
         )}
