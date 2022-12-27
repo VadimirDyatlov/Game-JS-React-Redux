@@ -3,34 +3,27 @@ const {
 } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Chat extends Model {
     static associate(models) {
-      this.hasMany(models.Hero, { foreignKey: 'user_id' });
-      this.hasMany(models.Game, { foreignKey: 'user_id' });
-      this.hasMany(models.Chat, { foreignKey: 'user_id' });
+      this.belongsTo(models.User, { foreignKey: 'user_id' });
     }
   }
-  User.init({
+  Chat.init({
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    name: {
-      allowNull: false,
-      type: DataTypes.TEXT,
-    },
-    password: {
-      allowNull: false,
-      type: DataTypes.TEXT,
-    },
-    gold: {
+    user_id: {
+      references: {
+        model: 'Users',
+        key: 'id',
+      },
       allowNull: false,
       type: DataTypes.INTEGER,
-      defaultValue: 0,
     },
-    avatar: {
+    message: {
       allowNull: false,
       type: DataTypes.TEXT,
     },
@@ -44,8 +37,8 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {
     sequelize,
-    modelName: 'User',
-    tableName: 'Users',
+    modelName: 'Chat',
+    tableName: 'Chats',
   });
-  return User;
+  return Chat;
 };

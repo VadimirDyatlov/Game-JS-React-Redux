@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getPlayerStats } from '../../store/statisticsReducer/statisticsReducer';
+import { getPlayersStats } from '../../store/statisticsReducer/statisticsReducer';
 import { formatTime } from '../functions';
 import './Statistics.css';
 
@@ -13,7 +13,7 @@ function Statistics() {
   const [countIndex, setcountIndex] = useState(0);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getPlayerStats());
+    dispatch(getPlayersStats());
   }, []);
   const handleClickSortStats = () => {
     const arr = ['killings', 'gold', 'time', 'gamesPlayed'];

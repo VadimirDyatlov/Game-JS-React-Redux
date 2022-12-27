@@ -10,6 +10,7 @@ function authUser(user) {
       id: user.id,
       name: user.name,
       gold: user.gold,
+      avatar: user.avatar,
     },
   };
 }
@@ -48,7 +49,7 @@ authRouter.route('/reg')
 
       const existingName = await User.findOne({ where: { name } });
       if (existingName) {
-        const message = 'Пользователь с таким логином или почтовым адресом уже существует!';
+        const message = 'Пользователь с таким именем уже существует!';
         res.status(409).json({ message });
         return;
       }
@@ -56,7 +57,7 @@ authRouter.route('/reg')
       const user = await User.create({
         name,
         password: await bcrypt.hash(password, 8),
-        avatar: '123',
+        avatar: 'false',
       });
       await Hero.create(createHero(user.id));
 

@@ -47,6 +47,18 @@ async function getUserLogOutApi(rejectWithValue, url) {
   }
 }
 
+async function editUserDataApi(rejectWithValue, data, url) {
+  try {
+    console.log('api--->', data);
+    const res = await axios.post(url, data);
+    console.log('res', res.data);
+    return res.data;
+  } catch (error) {
+    console.log(error.response.data);
+    return rejectWithValue(error.response.data);
+  }
+}
+
 export {
-  getCheckSessionApi, getUserSingUpApi, getUserSingInApi, getUserLogOutApi,
+  getCheckSessionApi, getUserSingUpApi, getUserSingInApi, getUserLogOutApi, editUserDataApi,
 };

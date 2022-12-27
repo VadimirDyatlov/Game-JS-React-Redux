@@ -7,7 +7,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import urlStore from '../urlStoreApi';
 
 import {
-  getCheckSessionApi, getUserSingUpApi, getUserSingInApi, getUserLogOutApi,
+  getCheckSessionApi, getUserSingUpApi, getUserSingInApi, getUserLogOutApi, editUserDataApi,
 } from './ApiFunction';
 
 const getCheckSession = createAsyncThunk(
@@ -25,6 +25,11 @@ const getUserSingIn = createAsyncThunk(
 const getUserLogOut = createAsyncThunk(
   'auth/getUserLogOut',
   async (_, { rejectWithValue }) => getUserLogOutApi(rejectWithValue, urlStore.authLogOut),
+);
+
+const editUserData = createAsyncThunk(
+  'settings/changeUserData',
+  async (data, { rejectWithValue }) => editUserDataApi(rejectWithValue, data, urlStore.editUserData),
 );
 
 const userSlice = createSlice({
@@ -108,11 +113,28 @@ const userSlice = createSlice({
         state.error = action.payload.message;
       }
     },
+    // editUserData
+    [editUserData.pending]: (state) => {
+      state.status = 'loading';
+      state.error = false;
+    },
+    [editUserData.fulfilled]: (state, action) => {
+      state.status = 'resolved';
+      if (action.payload.name) {
+        state.user.name = action.payload.name;
+      }
+    },
+    [editUserData.rejected]: (state, action) => {
+      state.status = 'rejected';
+      if (action.payload.message) {
+        state.error = action.payload.message;
+      }
+    },
   },
 });
 
 export const { setError } = userSlice.actions;
 export {
-  getCheckSession, getUserSingUp, getUserSingIn, getUserLogOut,
+  getCheckSession, getUserSingUp, getUserSingIn, getUserLogOut, editUserData,
 };
 export default userSlice.reducer;

@@ -10,12 +10,12 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import urlStore from '../urlStoreApi';
 
 import {
-  getPlayerStatsApi,
+  getPlayersStatsApi,
 } from './ApiFunction';
 
-const getPlayerStats = createAsyncThunk(
+const getPlayersStats = createAsyncThunk(
   'statistics/getPlayerStats',
-  async (_, { rejectWithValue }) => getPlayerStatsApi(rejectWithValue, urlStore.getPlayerStats),
+  async (_, { rejectWithValue }) => getPlayersStatsApi(rejectWithValue, urlStore.getPlayersStats),
 );
 
 const userSlice = createSlice({
@@ -29,18 +29,18 @@ const userSlice = createSlice({
   },
 
   extraReducers: {
-    [getPlayerStats.pending]: (state) => {
+    [getPlayersStats.pending]: (state) => {
       state.status = 'loading';
       state.error = false;
     },
-    [getPlayerStats.fulfilled]: (state, action) => {
+    [getPlayersStats.fulfilled]: (state, action) => {
       state.status = 'resolved';
       console.log(action.payload);
       if (action.payload.statistics) {
         state.playerStats = action.payload.statistics;
       }
     },
-    [getPlayerStats.rejected]: (state, action) => {
+    [getPlayersStats.rejected]: (state, action) => {
       state.status = 'rejected';
       if (action.payload.message) {
         state.error = action.payload.message;
@@ -67,6 +67,6 @@ const userSlice = createSlice({
 
 // export const { } = userSlice.actions;
 export {
-  getPlayerStats,
+  getPlayersStats,
 };
 export default userSlice.reducer;
